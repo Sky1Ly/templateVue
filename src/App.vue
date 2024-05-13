@@ -3,7 +3,9 @@ export default {
   name: "App",
   data() {
     return {
-      texto: ""
+      texto: "",
+      mostrarTexto: "",
+      tipoLetra: "https://developer.mozilla.org/es/docs/Learn/CSS/Styling_text/Fundamentals#tipos_de_letra"
     }
   }
 }
@@ -23,7 +25,7 @@ export default {
           <input type="text" class="form-control" id="colorFondoTexto" placeholder="#f0f0f0">
         </div>
         <div class="form-check mb-3">
-          <input class="form-check-input" type="checkbox" value="" id="mostrarTexto">
+          <input class="form-check-input" type="checkbox" value="" id="mostrarTexto" v-model="mostrarTexto">
           <label class="form-check-label" for="mostrarTexto">¿Mostrar Texto?</label>
         </div>
         <div class="mb-3">
@@ -35,12 +37,12 @@ export default {
           <input type="range" class="form-range" min="0" max="10" step="0.5" id="rango">
         </div>
         <div class="mb-3">
-          <label for="letra" class="form-label">Tipografía</label>
-          <select class="form-select">
-            <option selected>Arial</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <label for="tipografia" class="form-label">Tipografía</label>
+          <select v-model="tipoLetra" class="form-select">
+            <option selected value="">Seleccione un tipo de letra</option>
+            <option value="1">Times New Roman</option>
+            <option value="2">Georgia</option>
+            <option value="3">Palatino</option>
           </select>
         </div>
         <div class="form-check mb-3">
@@ -73,7 +75,7 @@ export default {
           caja: true,
           itemCentrado: true
         }">
-        <h1 :class="{maximaAnchura:true}">{{ texto }}</h1>
+          <h1 :style="{fontFamily: tipoLetra}" v-show="mostrarTexto">{{ texto }}</h1>
         </div>
       </div>
     </div>
@@ -85,10 +87,6 @@ export default {
   width: 400px;
   height: 400px;
   background-Color: red;
-}
-
-.maximaAnchura {
-  max-width: 400px;
 }
 
 .itemCentrado {
